@@ -8,7 +8,8 @@ Data and business logic live in
 no ORM and no business rules.
 
 > **Live:** https://studio-ops-web.vercel.app
-> **Portal example:** _fill in with a token from the seeder once the API is deployed_
+> **A real client portal:** https://studio-ops-web.vercel.app/portal/19132cbbc861741ee5c2762ec0db13be58a9e219e028ef9a23b93c54f3fb8381
+> **Admin panel:** https://studio-ops-api-6nny.onrender.com — `demo@studioops.dev` / `studioops`
 >
 > The API behind the portal is hosted on a free tier that suspends after fifteen
 > idle minutes, so the portal's first load after a quiet spell takes about a
