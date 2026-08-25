@@ -192,9 +192,15 @@ GitHub Actions runs on every pull request:
 
 ```bash
 pnpm lint
-pnpm typecheck
+pnpm typecheck   # generates route types first, then tsc
 pnpm test
+pnpm build
 ```
+
+`typecheck` runs `next typegen` before `tsc` on purpose. `LayoutProps` and
+`PageProps` are generated into `.next/types` by Next.js, so on a clean checkout
+`tsc` alone cannot find them — it passes on a machine that has already built and
+fails in CI, which is the worst possible order to discover it in.
 
 A red pipeline blocks the merge.
 
