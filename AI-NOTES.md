@@ -63,3 +63,48 @@ and `autoComplete="off"`, so the trap is only reachable by something that ignore
 all three. Verified in the rendered markup rather than assumed.
 
 **Commit:** `b9a9853`
+
+
+---
+
+## 4. Trusting a status code from something that was not the API
+
+**Generated:** `callApi` treated `response.status` as authoritative — 404 meant
+not found, and `fetchPortal` turned that into the portal's 404 page. Every HTTP
+client is written this way and it reads as obviously correct.
+
+**Why it was wrong:** the site was deployed before the API existed, so the
+portal's request reached the host's own "no such service" page: an HTML body
+under a 404. The client trusted the status, decided the token did not exist, and
+told the visitor their link was invalid.
+
+That is the single thing this page must never get wrong. A client holding a
+perfectly good link would have been told it was bad, and the studio would have
+spent an afternoon reissuing a token that already worked. It fails in exactly
+the situation where it is hardest to diagnose — the API is down, so nobody is
+looking at the API, they are looking at a link that "expired".
+
+**Fixed:** the API always answers JSON, so a non-JSON body means the response
+did not come from it. That raises 502, which joins the timeout in a "waking"
+state that says the visitor did nothing wrong. Found by deploying and opening
+the page, not by reasoning about it.
+
+**Commit:** `0ec8d36`
+
+---
+
+## 5. A generic error boundary for an expected condition
+
+**Generated:** letting an API timeout propagate to `error.tsx`, which is where
+unhandled errors belong.
+
+**Why it was wrong:** the API is hosted on a tier that suspends after fifteen
+idle minutes, so a timeout is not an error — it is what the first visit after a
+quiet spell looks like, every time. The page spent sixty seconds and then said
+"something went wrong" about something going precisely as designed.
+
+**Fixed:** a three-state result from `fetchPortal`, and a purpose-built waking
+state with a reload link. The error boundary stays for things that genuinely are
+errors.
+
+**Commit:** `b5bb308`
