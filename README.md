@@ -7,8 +7,8 @@ Data and business logic live in
 [`studio-ops-api`](../studio-ops-api) (Laravel 13). There is no database here,
 no ORM and no business rules.
 
-> **Live demo:** _fill in after the first deploy_
-> **Portal example:** _fill in with a token from the seeder_
+> **Live:** https://studio-ops-web.vercel.app
+> **Portal example:** _fill in with a token from the seeder once the API is deployed_
 >
 > The API behind the portal is hosted on a free tier that suspends after fifteen
 > idle minutes, so the portal's first load after a quiet spell takes about a

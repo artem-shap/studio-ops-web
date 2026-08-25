@@ -10,16 +10,28 @@ import type { Portal } from "@/types/studio";
  * this: the page shows one 404 for all three. Which of them it was is
  * information worth having only to someone guessing tokens.
  */
-export async function fetchPortal(token: string): Promise<Portal | null> {
+export type PortalResult =
+  | { state: "found"; portal: Portal }
+  | { state: "not-found" }
+  | { state: "waking" };
+
+export async function fetchPortal(token: string): Promise<PortalResult> {
   try {
     const payload = await callApi<{ data: Portal }>(
       `/api/portal/${encodeURIComponent(token)}`,
     );
 
-    return payload.data;
+    return { state: "found", portal: payload.data };
   } catch (error) {
     if (error instanceof ApiError && error.status === 404) {
-      return null;
+      return { state: "not-found" };
+    }
+
+    // A timeout here is the expected shape of a free-tier container waking up,
+    // not a fault. It gets its own state so the page can say something true
+    // rather than falling through to the generic error boundary.
+    if (error instanceof ApiError && error.status === 504) {
+      return { state: "waking" };
     }
 
     throw error;

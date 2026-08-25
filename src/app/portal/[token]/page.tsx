@@ -61,14 +61,36 @@ function formatDate(value: string | null): string {
 
 export default async function PortalPage({ params }: PageProps<"/portal/[token]">) {
   const { token } = await params;
-  const portal = await fetchPortal(token);
+  const result = await fetchPortal(token);
 
   // Invalid, expired and revoked all land here, exactly as they do in the API.
   // Which one it was is only useful to someone guessing tokens.
-  if (portal === null) {
+  if (result.state === "not-found") {
     notFound();
   }
 
+  if (result.state === "waking") {
+    return (
+      <main id="main" className="mx-auto w-full max-w-3xl px-6 py-24">
+        <h1 className="text-2xl font-semibold tracking-tight">
+          Waking the studio&rsquo;s system up
+        </h1>
+        <p className="mt-3 max-w-prose text-muted">
+          This demo runs on free infrastructure that goes to sleep when nobody
+          is using it. It takes about a minute to come back. Reload the page and
+          it will be here.
+        </p>
+        <a
+          href={`/portal/${token}`}
+          className="mt-6 inline-block rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground"
+        >
+          Reload
+        </a>
+      </main>
+    );
+  }
+
+  const portal = result.portal;
   const name = portal.client.company ?? portal.client.name;
 
   return (
