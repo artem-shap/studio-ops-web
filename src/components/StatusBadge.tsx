@@ -1,6 +1,11 @@
 import type { Status, StatusColor } from "@/types/studio";
 
 /**
+ * Only the colours a project or milestone status can actually carry. The
+ * generated contract has no `rose` on this side: it belongs to the inquiry
+ * status, which never leaves the admin panel. Adding it back would compile
+ * and would be dead code.
+ *
  * Written out in full because Tailwind scans source for complete class names.
  * A template literal built from the colour would be purged from the bundle and
  * every badge would render unstyled in production and nowhere else.
@@ -13,7 +18,6 @@ const classes: Record<StatusColor, string> = {
     "bg-amber-100 text-amber-800 ring-amber-600/20 dark:bg-amber-400/10 dark:text-amber-300 dark:ring-amber-400/30",
   emerald:
     "bg-emerald-100 text-emerald-700 ring-emerald-600/20 dark:bg-emerald-400/10 dark:text-emerald-300 dark:ring-emerald-400/30",
-  rose: "bg-rose-100 text-rose-700 ring-rose-600/20 dark:bg-rose-400/10 dark:text-rose-300 dark:ring-rose-400/30",
 };
 
 export function StatusBadge({ status }: { status: Status }) {

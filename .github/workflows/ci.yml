@@ -36,6 +36,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Regenerate from the published contract and fail if it moved. The
+      # schema tests check the Zod rules against this file, so a stale copy
+      # would let the two sides drift while the suite stayed green.
+      - name: Check the API contract is current
+        run: |
+          pnpm types:api
+          git diff --exit-code -- openapi.json src/types/api.ts
+
       - name: Lint
         run: pnpm lint
 
