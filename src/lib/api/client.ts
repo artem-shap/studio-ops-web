@@ -58,6 +58,22 @@ export async function callApi<T>(
     throw new ApiError("The studio API did not respond in time.", 504);
   }
 
+  // A status alone is not enough to trust. Infrastructure in front of the API
+  // answers with its own pages — a platform's "no such service" is a 404 with
+  // an HTML body, and reading that as "this token does not exist" would tell a
+  // client their link is invalid when the truth is that the API is missing.
+  // Our API always answers JSON, so anything else did not come from it.
+  const isJson = response.headers
+    .get("content-type")
+    ?.includes("application/json");
+
+  if (!isJson) {
+    throw new ApiError(
+      `Non-JSON response with status ${response.status}: the API is unreachable`,
+      502,
+    );
+  }
+
   if (!response.ok) {
     throw new ApiError(`Request failed with status ${response.status}`, response.status);
   }

@@ -30,7 +30,10 @@ export async function fetchPortal(token: string): Promise<PortalResult> {
     // A timeout here is the expected shape of a free-tier container waking up,
     // not a fault. It gets its own state so the page can say something true
     // rather than falling through to the generic error boundary.
-    if (error instanceof ApiError && error.status === 504) {
+    // 504 is a timeout waking the container; 502 is the API not answering as
+    // itself. Neither is the visitor's fault and neither means their link is
+    // bad, so both get the honest message instead of a 404.
+    if (error instanceof ApiError && (error.status === 504 || error.status === 502)) {
       return { state: "waking" };
     }
 
