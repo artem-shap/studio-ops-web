@@ -37,7 +37,8 @@ export async function callApi<T>(
         "Content-Type": "application/json",
         "X-Studio-Key": env.STUDIO_API_KEY,
       },
-      body: options.body === undefined ? undefined : JSON.stringify(options.body),
+      body:
+        options.body === undefined ? undefined : JSON.stringify(options.body),
 
       // Live data only. The portal shows project status, and a cached portal
       // page does not fail loudly — it shows last week's status to a client.
@@ -75,7 +76,10 @@ export async function callApi<T>(
   }
 
   if (!response.ok) {
-    throw new ApiError(`Request failed with status ${response.status}`, response.status);
+    throw new ApiError(
+      `Request failed with status ${response.status}`,
+      response.status,
+    );
   }
 
   return (await response.json()) as T;

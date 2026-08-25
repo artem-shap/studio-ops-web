@@ -27,7 +27,9 @@ describe("inquirySchema", () => {
   });
 
   it("rejects an empty email", () => {
-    expect(inquirySchema.safeParse({ ...valid, email: "" }).success).toBe(false);
+    expect(inquirySchema.safeParse({ ...valid, email: "" }).success).toBe(
+      false,
+    );
   });
 
   it("rejects a malformed email", () => {

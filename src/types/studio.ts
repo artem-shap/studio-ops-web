@@ -24,11 +24,11 @@ export type PortalPayload = components["schemas"]["PortalResource"];
  * guarding at every use.
  */
 export type ProjectWithMilestones = Omit<Project, "milestones"> & {
-    milestones: Milestone[];
+  milestones: Milestone[];
 };
 
 export type Portal = Omit<PortalPayload, "projects"> & {
-    projects: ProjectWithMilestones[];
+  projects: ProjectWithMilestones[];
 };
 
 /**

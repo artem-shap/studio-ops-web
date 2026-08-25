@@ -15,13 +15,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "StudioOps — project tracking for design studios",
+  title: {
+    default: "StudioOps — a design studio that keeps you in the loop",
+    template: "%s — StudioOps",
+  },
   description:
-    "Take inquiries, run projects, and let clients check their own status instead of emailing to ask.",
+    "Brand, websites and internal tools for companies that need the work handed over, not held hostage. Every client sees their own project as it moves.",
   openGraph: {
-    title: "StudioOps — project tracking for design studios",
+    title: "StudioOps — a design studio that keeps you in the loop",
     description:
-      "Take inquiries, run projects, and let clients check their own status instead of emailing to ask.",
+      "Brand, websites and internal tools for companies that need the work handed over, not held hostage.",
     type: "website",
   },
   twitter: { card: "summary_large_image" },
@@ -31,12 +34,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col font-sans">
         <a
           href="#main"
-          className="sr-only rounded-md bg-accent px-4 py-2 text-accent-foreground focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50"
+          className="sr-only rounded-md bg-ink px-4 py-2 text-paper focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50"
         >
           Skip to content
         </a>

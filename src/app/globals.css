@@ -1,51 +1,77 @@
 @import "tailwindcss";
 
 /*
- * Tokens, not hex values in markup. Dark mode is defined here alongside light
- * from the first commit rather than bolted on once the design is finished,
+ * A restrained palette: paper, ink, one hairline weight, and a single accent
+ * used sparingly. Dark mode is defined here alongside light from the start,
  * because retrofitting it means revisiting every colour decision.
  */
 :root {
-  --background: oklch(99% 0 0);
-  --surface: oklch(97% 0.003 250);
-  --foreground: oklch(21% 0.01 250);
-  --muted: oklch(52% 0.015 250);
-  --border: oklch(90% 0.005 250);
-  --accent: oklch(52% 0.16 255);
-  --accent-foreground: oklch(99% 0 0);
+  --paper: oklch(99% 0.002 85);
+  --raised: oklch(97.2% 0.004 85);
+  --ink: oklch(21% 0.008 70);
+  --ink-soft: oklch(46% 0.012 70);
+  --ink-faint: oklch(62% 0.012 70);
+  --rule: oklch(90.5% 0.004 80);
+  --rule-strong: oklch(83% 0.006 80);
+  --accent: oklch(48% 0.13 250);
+  --on-accent: oklch(99% 0.002 85);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: oklch(17% 0.01 250);
-    --surface: oklch(21% 0.012 250);
-    --foreground: oklch(95% 0.005 250);
-    --muted: oklch(68% 0.02 250);
-    --border: oklch(30% 0.012 250);
-    --accent: oklch(70% 0.14 255);
-    --accent-foreground: oklch(17% 0.01 250);
+    --paper: oklch(17.5% 0.008 265);
+    --raised: oklch(21.5% 0.01 265);
+    --ink: oklch(95% 0.004 265);
+    --ink-soft: oklch(72% 0.012 265);
+    --ink-faint: oklch(58% 0.012 265);
+    --rule: oklch(28% 0.012 265);
+    --rule-strong: oklch(36% 0.014 265);
+    --accent: oklch(74% 0.12 250);
+    --on-accent: oklch(17.5% 0.008 265);
   }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
+  --color-paper: var(--paper);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
   --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-on-accent: var(--on-accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Never removed, only replaced with something visible. */
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* A small-caps label used above headings and beside figures. */
+.eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

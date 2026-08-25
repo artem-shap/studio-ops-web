@@ -1,18 +1,27 @@
 import Link from "next/link";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export default function NotFound() {
   return (
-    <main className="mx-auto flex w-full max-w-4xl flex-col items-start gap-4 px-6 py-24">
-      <h1 className="text-2xl font-semibold tracking-tight">
-        There is nothing at this address
-      </h1>
-      <p className="max-w-prose text-muted">
-        If you followed a project link from an email, it may have expired — they
-        are valid for ninety days. Ask the studio for a fresh one.
-      </p>
-      <Link href="/" className="text-accent underline underline-offset-4">
-        Back to the studio
-      </Link>
-    </main>
+    <>
+      <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-6 py-24">
+        <p className="eyebrow">Nothing here</p>
+        <h1 className="mt-5 text-3xl font-semibold tracking-tight">
+          There is nothing at this address
+        </h1>
+        <p className="mt-4 max-w-prose leading-relaxed text-ink-soft">
+          If you followed a project link from an email, it may have expired —
+          they are valid for ninety days. Ask us for a fresh one and we will
+          send it straight over.
+        </p>
+        <Link
+          href="/"
+          className="mt-8 inline-block rounded-md bg-ink px-6 py-3 text-sm font-medium text-paper transition-opacity hover:opacity-90"
+        >
+          Back to the studio
+        </Link>
+      </main>
+      <SiteFooter />
+    </>
   );
 }

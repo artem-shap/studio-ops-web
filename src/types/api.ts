@@ -4,194 +4,194 @@
  */
 
 export interface paths {
-    "/inquiries": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["inquiries.store"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  "/inquiries": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/portal/{token}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["portal.show"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post: operations["inquiries.store"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/portal/{token}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    get: operations["portal.show"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        /** MilestoneResource */
-        MilestoneResource: {
-            id: number;
-            title: string;
-            due_date: string | null;
-            /**
-             * @description The enum ships its own presentation so the admin panel and the
-             *     portal cannot end up with two different status-to-colour maps.
-             */
-            status: {
-                value: string;
-                /** @enum {string} */
-                label: "Pending" | "In progress" | "Done";
-                /** @enum {string} */
-                color: "slate" | "blue" | "emerald";
-            };
-        };
-        /** PortalResource */
-        PortalResource: {
-            client: {
-                name: string;
-                company: string | null;
-            };
-            projects?: components["schemas"]["ProjectResource"][];
-        };
-        /** ProjectResource */
-        ProjectResource: {
-            id: number;
-            title: string;
-            description: string | null;
-            status: {
-                value: string;
-                /** @enum {string} */
-                label: "Draft" | "Active" | "On hold" | "Completed";
-                /** @enum {string} */
-                color: "slate" | "blue" | "amber" | "emerald";
-            };
-            /**
-             * @description Minor units and a currency code. Formatting is presentation, and
-             *     presentation belongs to whichever client is rendering it.
-             */
-            budget_cents: number | null;
-            currency: string;
-            start_date: string | null;
-            due_date: string | null;
-            milestones?: components["schemas"]["MilestoneResource"][];
-        };
-        /** StoreInquiryRequest */
-        StoreInquiryRequest: {
-            name: string;
-            /** Format: email */
-            email: string;
-            company?: string | null;
-            message: string;
-            budget_range?: string | null;
-            /**
-             * @description Present and empty. Filled means a bot, and it is rejected as an
-             *     ordinary validation failure so the sender learns nothing.
-             */
-            website: string;
-        };
+  schemas: {
+    /** MilestoneResource */
+    MilestoneResource: {
+      id: number;
+      title: string;
+      due_date: string | null;
+      /**
+       * @description The enum ships its own presentation so the admin panel and the
+       *     portal cannot end up with two different status-to-colour maps.
+       */
+      status: {
+        value: string;
+        /** @enum {string} */
+        label: "Pending" | "In progress" | "Done";
+        /** @enum {string} */
+        color: "slate" | "blue" | "emerald";
+      };
     };
-    responses: {
-        /** @description Validation error */
-        ValidationException: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @description Errors overview. */
-                    message: string;
-                    /** @description A detailed description of each field that failed validation. */
-                    errors: {
-                        [key: string]: string[];
-                    };
-                };
-            };
-        };
-        /** @description Not found */
-        ModelNotFoundException: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @description Error overview. */
-                    message: string;
-                };
-            };
-        };
+    /** PortalResource */
+    PortalResource: {
+      client: {
+        name: string;
+        company: string | null;
+      };
+      projects?: components["schemas"]["ProjectResource"][];
     };
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    /** ProjectResource */
+    ProjectResource: {
+      id: number;
+      title: string;
+      description: string | null;
+      status: {
+        value: string;
+        /** @enum {string} */
+        label: "Draft" | "Active" | "On hold" | "Completed";
+        /** @enum {string} */
+        color: "slate" | "blue" | "amber" | "emerald";
+      };
+      /**
+       * @description Minor units and a currency code. Formatting is presentation, and
+       *     presentation belongs to whichever client is rendering it.
+       */
+      budget_cents: number | null;
+      currency: string;
+      start_date: string | null;
+      due_date: string | null;
+      milestones?: components["schemas"]["MilestoneResource"][];
+    };
+    /** StoreInquiryRequest */
+    StoreInquiryRequest: {
+      name: string;
+      /** Format: email */
+      email: string;
+      company?: string | null;
+      message: string;
+      budget_range?: string | null;
+      /**
+       * @description Present and empty. Filled means a bot, and it is rejected as an
+       *     ordinary validation failure so the sender learns nothing.
+       */
+      website: string;
+    };
+  };
+  responses: {
+    /** @description Validation error */
+    ValidationException: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @description Errors overview. */
+          message: string;
+          /** @description A detailed description of each field that failed validation. */
+          errors: {
+            [key: string]: string[];
+          };
+        };
+      };
+    };
+    /** @description Not found */
+    ModelNotFoundException: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** @description Error overview. */
+          message: string;
+        };
+      };
+    };
+  };
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "inquiries.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StoreInquiryRequest"];
-            };
-        };
-        responses: {
-            /**
-             * @description Nothing about the inquiry goes back over the wire. The sender learns
-             *     that it arrived, and that is all they need.
-             */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        id: unknown;
-                    };
-                };
-            };
-            422: components["responses"]["ValidationException"];
-        };
+  "inquiries.store": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "portal.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                token: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `PortalResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["PortalResource"];
-                    };
-                };
-            };
-            404: components["responses"]["ModelNotFoundException"];
-        };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["StoreInquiryRequest"];
+      };
     };
+    responses: {
+      /**
+       * @description Nothing about the inquiry goes back over the wire. The sender learns
+       *     that it arrived, and that is all they need.
+       */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            id: unknown;
+          };
+        };
+      };
+      422: components["responses"]["ValidationException"];
+    };
+  };
+  "portal.show": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        token: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description `PortalResource` */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            data: components["schemas"]["PortalResource"];
+          };
+        };
+      };
+      404: components["responses"]["ModelNotFoundException"];
+    };
+  };
 }

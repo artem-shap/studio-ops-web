@@ -3,8 +3,7 @@ import type { Status, StatusColor } from "@/types/studio";
 /**
  * Only the colours a project or milestone status can actually carry. The
  * generated contract has no `rose` on this side: it belongs to the inquiry
- * status, which never leaves the admin panel. Adding it back would compile
- * and would be dead code.
+ * status, which never leaves the admin panel.
  *
  * Written out in full because Tailwind scans source for complete class names.
  * A template literal built from the colour would be purged from the bundle and
@@ -12,18 +11,18 @@ import type { Status, StatusColor } from "@/types/studio";
  */
 const classes: Record<StatusColor, string> = {
   slate:
-    "bg-slate-100 text-slate-700 ring-slate-600/20 dark:bg-slate-400/10 dark:text-slate-300 dark:ring-slate-400/30",
-  blue: "bg-blue-100 text-blue-700 ring-blue-600/20 dark:bg-blue-400/10 dark:text-blue-300 dark:ring-blue-400/30",
+    "border-rule-strong text-ink-soft dark:border-rule-strong dark:text-ink-soft",
+  blue: "border-blue-500/40 text-blue-700 dark:border-blue-400/40 dark:text-blue-300",
   amber:
-    "bg-amber-100 text-amber-800 ring-amber-600/20 dark:bg-amber-400/10 dark:text-amber-300 dark:ring-amber-400/30",
+    "border-amber-500/40 text-amber-700 dark:border-amber-400/40 dark:text-amber-300",
   emerald:
-    "bg-emerald-100 text-emerald-700 ring-emerald-600/20 dark:bg-emerald-400/10 dark:text-emerald-300 dark:ring-emerald-400/30",
+    "border-emerald-500/40 text-emerald-700 dark:border-emerald-400/40 dark:text-emerald-300",
 };
 
 export function StatusBadge({ status }: { status: Status }) {
   return (
     <span
-      className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${classes[status.color]}`}
+      className={`inline-flex shrink-0 items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${classes[status.color]}`}
     >
       {status.label}
     </span>
