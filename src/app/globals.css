@@ -1,65 +1,147 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 /*
- * A restrained palette: paper, ink, one hairline weight, and a single accent
- * used sparingly. Dark mode is defined here alongside light from the start,
- * because retrofitting it means revisiting every colour decision.
+ * One palette, two consumers.
+ *
+ * The named tokens below — paper, ink, rule — are the design. shadcn's
+ * semantic variables are mapped onto them rather than kept alongside, so a
+ * component pulled from a registry inherits this palette instead of arriving
+ * with its own greys.
+ *
+ * Dark mode is declared twice on purpose: the media query covers people who
+ * never touch a toggle, and the .dark class is what shadcn components expect.
  */
 :root {
   --paper: oklch(99% 0.002 85);
-  --raised: oklch(97.2% 0.004 85);
-  --ink: oklch(21% 0.008 70);
-  --ink-soft: oklch(46% 0.012 70);
-  --ink-faint: oklch(62% 0.012 70);
+  --raised: oklch(97.4% 0.004 85);
+  --sunken: oklch(95.5% 0.005 85);
+  --ink: oklch(20% 0.008 70);
+  --ink-soft: oklch(45% 0.012 70);
+  --ink-faint: oklch(61% 0.012 70);
   --rule: oklch(90.5% 0.004 80);
-  --rule-strong: oklch(83% 0.006 80);
-  --accent: oklch(48% 0.13 250);
-  --on-accent: oklch(99% 0.002 85);
+  --rule-strong: oklch(82% 0.006 80);
+  --brand: oklch(47% 0.14 250);
+  --radius: 0.5rem;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--sunken);
+  --secondary-foreground: var(--ink);
+  --muted: var(--raised);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--sunken);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(55% 0.2 27);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--brand);
+  --sidebar: var(--raised);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--sunken);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--brand);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: oklch(17.5% 0.008 265);
-    --raised: oklch(21.5% 0.01 265);
-    --ink: oklch(95% 0.004 265);
-    --ink-soft: oklch(72% 0.012 265);
-    --ink-faint: oklch(58% 0.012 265);
-    --rule: oklch(28% 0.012 265);
+    --paper: oklch(16.5% 0.008 265);
+    --raised: oklch(20.5% 0.01 265);
+    --sunken: oklch(24% 0.012 265);
+    --ink: oklch(96% 0.004 265);
+    --ink-soft: oklch(71% 0.012 265);
+    --ink-faint: oklch(56% 0.012 265);
+    --rule: oklch(27% 0.012 265);
     --rule-strong: oklch(36% 0.014 265);
-    --accent: oklch(74% 0.12 250);
-    --on-accent: oklch(17.5% 0.008 265);
+    --brand: oklch(76% 0.12 250);
+    --destructive: oklch(65% 0.19 25);
   }
+}
+
+.dark {
+  --paper: oklch(16.5% 0.008 265);
+  --raised: oklch(20.5% 0.01 265);
+  --sunken: oklch(24% 0.012 265);
+  --ink: oklch(96% 0.004 265);
+  --ink-soft: oklch(71% 0.012 265);
+  --ink-faint: oklch(56% 0.012 265);
+  --rule: oklch(27% 0.012 265);
+  --rule-strong: oklch(36% 0.014 265);
+  --brand: oklch(76% 0.12 250);
+  --destructive: oklch(65% 0.19 25);
 }
 
 @theme inline {
   --color-paper: var(--paper);
   --color-raised: var(--raised);
+  --color-sunken: var(--sunken);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-ink-faint: var(--ink-faint);
   --color-rule: var(--rule);
   --color-rule-strong: var(--rule-strong);
+  --color-brand: var(--brand);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
-  --color-on-accent: var(--on-accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-body {
-  background: var(--paper);
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Never removed, only replaced with something visible. */
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 }
 
-/* Never removed, only replaced with something visible. */
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-/* A small-caps label used above headings and beside figures. */
-.eyebrow {
+@utility eyebrow {
   font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -67,11 +149,38 @@ body {
   color: var(--ink-faint);
 }
 
+/* A hairline grid, used behind the hero. Decorative and very quiet. */
+@utility grid-backdrop {
+  background-image:
+    linear-gradient(to right, var(--rule) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    black 20%,
+    transparent 75%
+  );
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee 42s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

@@ -1,7 +1,7 @@
 import { Check, Minus } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { SiteFooter } from "@/components/SiteFooter";
+import { SiteFooter } from "@/components/site/SiteFooter";
 import { StatusBadge } from "@/components/StatusBadge";
 import { fetchPortal } from "@/lib/api/portal";
 import type { Milestone, ProjectWithMilestones } from "@/types/studio";

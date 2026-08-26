@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SiteFooter } from "@/components/SiteFooter";
+import { SiteFooter } from "@/components/site/SiteFooter";
 
 export default function NotFound() {
   return (

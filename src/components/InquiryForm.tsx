@@ -7,11 +7,12 @@ import { ArrowRight, Check } from "lucide-react";
 import { useActionState, useId } from "react";
 import { sendInquiry, type InquiryState } from "@/app/actions";
 import { budgetRanges } from "@/lib/schemas/inquiry";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 const initial: InquiryState = { status: "idle" };
-
-const field =
-  "w-full rounded-md border border-rule bg-raised px-3.5 py-2.5 text-sm text-ink transition-colors placeholder:text-ink-faint hover:border-rule-strong focus:border-accent focus:outline-none";
 
 function FieldError({ id, messages }: { id: string; messages?: string[] }) {
   if (!messages?.length) {
@@ -19,7 +20,7 @@ function FieldError({ id, messages }: { id: string; messages?: string[] }) {
   }
 
   return (
-    <p id={id} className="text-sm text-red-600 dark:text-red-400" role="alert">
+    <p id={id} className="text-sm text-destructive" role="alert">
       {messages[0]}
     </p>
   );
@@ -32,7 +33,7 @@ export function InquiryForm() {
   if (state.status === "success") {
     return (
       <div className="flex max-w-xl flex-col items-start gap-4 rounded-lg border border-rule bg-raised p-8">
-        <span className="flex size-9 items-center justify-center rounded-full border border-rule-strong">
+        <span className="flex size-10 items-center justify-center rounded-full border border-rule-strong bg-paper">
           <Check className="size-4" strokeWidth={2} aria-hidden="true" />
         </span>
         <h3 className="text-lg font-medium tracking-tight">That is with us</h3>
@@ -48,15 +49,13 @@ export function InquiryForm() {
   return (
     <form
       action={formAction}
-      className="flex max-w-xl flex-col gap-6"
+      className="flex max-w-xl flex-col gap-6 rounded-lg border border-rule bg-raised p-8"
       noValidate
     >
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor={`${uid}-name`} className="text-sm font-medium">
-            Your name
-          </label>
-          <input
+          <Label htmlFor={`${uid}-name`}>Your name</Label>
+          <Input
             id={`${uid}-name`}
             name="name"
             required
@@ -64,16 +63,14 @@ export function InquiryForm() {
             aria-describedby={
               state.errors?.name ? `${uid}-name-error` : undefined
             }
-            className={field}
+            aria-invalid={state.errors?.name ? true : undefined}
           />
           <FieldError id={`${uid}-name-error`} messages={state.errors?.name} />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor={`${uid}-email`} className="text-sm font-medium">
-            Email
-          </label>
-          <input
+          <Label htmlFor={`${uid}-email`}>Email</Label>
+          <Input
             id={`${uid}-email`}
             name="email"
             type="email"
@@ -82,7 +79,7 @@ export function InquiryForm() {
             aria-describedby={
               state.errors?.email ? `${uid}-email-error` : undefined
             }
-            className={field}
+            aria-invalid={state.errors?.email ? true : undefined}
           />
           <FieldError
             id={`${uid}-email-error`}
@@ -93,14 +90,13 @@ export function InquiryForm() {
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor={`${uid}-company`} className="text-sm font-medium">
+          <Label htmlFor={`${uid}-company`}>
             Company <span className="font-normal text-ink-faint">optional</span>
-          </label>
-          <input
+          </Label>
+          <Input
             id={`${uid}-company`}
             name="company"
             autoComplete="organization"
-            className={field}
           />
           <FieldError
             id={`${uid}-company-error`}
@@ -109,14 +105,20 @@ export function InquiryForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor={`${uid}-budget`} className="text-sm font-medium">
+          <Label htmlFor={`${uid}-budget`}>
             Budget <span className="font-normal text-ink-faint">optional</span>
-          </label>
+          </Label>
+          {/*
+            A native select on purpose. The styled one is a listbox that keeps
+            its value in React state, and this form is submitted natively as
+            FormData by a Server Action — so a component that does not put a
+            value in the form is a component that silently drops the field.
+          */}
           <select
             id={`${uid}-budget`}
             name="budgetRange"
             defaultValue=""
-            className={field}
+            className="h-9 w-full rounded-lg border border-input bg-background px-3 text-sm shadow-xs transition-colors hover:border-rule-strong focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           >
             <option value="">Prefer not to say</option>
             {budgetRanges.map((range) => (
@@ -129,10 +131,8 @@ export function InquiryForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor={`${uid}-message`} className="text-sm font-medium">
-          What are you trying to do?
-        </label>
-        <textarea
+        <Label htmlFor={`${uid}-message`}>What are you trying to do?</Label>
+        <Textarea
           id={`${uid}-message`}
           name="message"
           rows={6}
@@ -141,7 +141,8 @@ export function InquiryForm() {
           aria-describedby={
             state.errors?.message ? `${uid}-message-error` : undefined
           }
-          className={`${field} resize-y leading-relaxed`}
+          aria-invalid={state.errors?.message ? true : undefined}
+          className="leading-relaxed"
         />
         <FieldError
           id={`${uid}-message-error`}
@@ -171,24 +172,24 @@ export function InquiryForm() {
       />
 
       {state.message ? (
-        <p className="text-sm text-red-600 dark:text-red-400" role="alert">
+        <p className="text-sm text-destructive" role="alert">
           {state.message}
         </p>
       ) : null}
 
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-        <button
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-rule pt-6">
+        <Button
           type="submit"
           disabled={pending}
-          className="group inline-flex items-center gap-2 rounded-md bg-ink px-6 py-3 text-sm font-medium text-paper transition-opacity hover:opacity-90 disabled:opacity-50"
+          className="group h-11 gap-2 px-6 text-sm"
         >
           {pending ? "Sending" : "Send inquiry"}
           <ArrowRight
-            className="size-4 transition-transform group-hover:translate-x-0.5"
+            className="transition-transform group-hover:translate-x-0.5"
             strokeWidth={1.75}
             aria-hidden="true"
           />
-        </button>
+        </Button>
         <p className="text-sm text-ink-faint">
           No newsletter, no follow-up sequence.
         </p>
