@@ -97,10 +97,15 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-colors ${
+      /*
+        The blur is always on — over a solid background at the top of the page
+        it does nothing visible, and switching it on mid-scroll popped. Only
+        the background and the border animate, and they animate together.
+      */
+      className={`sticky top-0 z-40 border-b backdrop-blur-md transition-[background-color,border-color] duration-300 ${
         scrolled
-          ? "border-b border-rule bg-paper/85 backdrop-blur-md"
-          : "border-b border-transparent"
+          ? "border-rule bg-paper/85"
+          : "border-transparent bg-paper/0"
       }`}
     >
       <div className="site-x flex h-16 w-full items-center justify-between">

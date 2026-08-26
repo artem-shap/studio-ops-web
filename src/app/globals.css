@@ -219,17 +219,17 @@
   background-image:
     linear-gradient(to right, var(--rule) 1px, transparent 1px),
     linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
-  background-size: 72px 72px;
+  background-size: 80px 80px;
 
   /*
-   * Two masks, intersected. The radial one keeps the grid off the edges; the
-   * linear one fades it in below the header. The previous single mask was at
-   * full strength exactly where it met the header border, which put the
-   * densest part of the pattern against a hard line at the top of the page.
+   * The linear mask is the important half. The grid is fully transparent for
+   * the first 200px and only reaches full strength at 420px, so nothing
+   * changes tone anywhere near the header and there is no edge to see. The
+   * radial one keeps it off the sides and lets it go before the copy starts.
    */
   mask-image:
-    radial-gradient(ellipse 90% 70% at 50% 12%, black 25%, transparent 78%),
-    linear-gradient(to bottom, transparent 0, black 140px);
+    radial-gradient(ellipse 85% 65% at 50% 22%, black 20%, transparent 76%),
+    linear-gradient(to bottom, transparent 200px, black 420px);
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
 }

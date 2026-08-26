@@ -10,13 +10,13 @@ import { buttonOutline, buttonPrimary } from "@/components/site/controls";
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-rule">
+      {/*
+        No tint and no wash at the top of the page. Anything that changes tone
+        at the header's lower edge reads as a hard line, however subtle it is —
+        the fade has to begin well clear of it, which is what the mask does.
+      */}
       <div
-        className="grid-backdrop pointer-events-none absolute inset-0 opacity-60"
-        aria-hidden="true"
-      />
-      {/* A single warm wash so the grid does not read as pure grey. */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-oat/10 to-transparent"
+        className="grid-backdrop pointer-events-none absolute inset-0 opacity-45"
         aria-hidden="true"
       />
 
