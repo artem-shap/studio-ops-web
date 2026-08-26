@@ -1,4 +1,4 @@
-import { ClientMarquee } from "@/components/site/ClientMarquee";
+import { ClientStrip } from "@/components/site/ClientStrip";
 import { Faq } from "@/components/site/Faq";
 import { Hero } from "@/components/site/Hero";
 import { Process } from "@/components/site/Process";
@@ -20,7 +20,7 @@ export default function Home() {
 
       <main id="main">
         <Hero />
-        <ClientMarquee />
+        <ClientStrip />
         <Work />
         <Stats />
         <Services />
