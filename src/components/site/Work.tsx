@@ -8,6 +8,8 @@ const work = [
     outcome: "Opened on schedule",
     tags: ["Identity", "Website"],
     variant: "identity" as const,
+    image: null as string | null,
+    alt: "Brand identity for a speciality coffee roaster: packaging, cups and printed collateral laid out on a pale stone counter.",
   },
   {
     client: "Tidewater Outfitters",
@@ -16,6 +18,8 @@ const work = [
     outcome: "Cart abandonment down by a third",
     tags: ["E-commerce", "Build"],
     variant: "commerce" as const,
+    image: null as string | null,
+    alt: "An outdoor outfitter's online store open on a laptop and a phone, sitting on a workbench beside folded technical fabric.",
   },
   {
     client: "Meridian Dental",
@@ -24,6 +28,8 @@ const work = [
     outcome: "No-shows halved in two months",
     tags: ["Product", "Internal tools"],
     variant: "product" as const,
+    image: null as string | null,
+    alt: "A booking screen open on a tablet at a dental practice reception desk, in soft daylight.",
   },
 ];
 
@@ -54,7 +60,11 @@ export function Work() {
         <ul className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-3">
           {work.map((item) => (
             <li key={item.client} className="flex flex-col gap-5">
-              <ProjectVisual variant={item.variant} />
+              <ProjectVisual
+                variant={item.variant}
+                image={item.image}
+                alt={item.alt}
+              />
 
               <div className="flex flex-col gap-3">
                 <p className="eyebrow">{item.client}</p>
