@@ -21,7 +21,7 @@ export function ProjectVisual({
   alt?: string;
 }) {
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-rule bg-sunken">
+    <div className="relative aspect-[11/6] w-full overflow-hidden rounded-lg border border-rule bg-sunken">
       {image ? (
         <Image
           src={image}
@@ -43,7 +43,7 @@ export function ProjectVisual({
 
 function Identity() {
   return (
-    <svg viewBox="0 0 400 300" className="size-full" role="presentation">
+    <svg viewBox="0 0 400 300" className="size-full" role="presentation" preserveAspectRatio="xMidYMid slice">
       <circle cx="140" cy="150" r="66" fill="currentColor" className="text-ink" />
       <circle
         cx="228"
@@ -62,7 +62,7 @@ function Identity() {
 
 function Commerce() {
   return (
-    <svg viewBox="0 0 400 300" className="size-full" role="presentation">
+    <svg viewBox="0 0 400 300" className="size-full" role="presentation" preserveAspectRatio="xMidYMid slice">
       <rect x="44" y="40" width="140" height="180" rx="8" className="fill-current text-paper" />
       <rect x="60" y="56" width="108" height="88" rx="4" className="fill-current text-rule-strong" />
       <rect x="60" y="158" width="80" height="7" rx="3.5" className="fill-current text-rule-strong" />
@@ -78,7 +78,7 @@ function Commerce() {
 
 function Product() {
   return (
-    <svg viewBox="0 0 400 300" className="size-full" role="presentation">
+    <svg viewBox="0 0 400 300" className="size-full" role="presentation" preserveAspectRatio="xMidYMid slice">
       <rect x="40" y="52" width="320" height="196" rx="10" className="fill-current text-paper" />
       <rect x="40" y="52" width="320" height="30" rx="10" className="fill-current text-rule" />
       <rect x="60" y="102" width="84" height="126" rx="6" className="fill-current text-rule" />
