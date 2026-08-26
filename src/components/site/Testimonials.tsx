@@ -34,18 +34,18 @@ export function Testimonials() {
           Mostly about not having to chase us
         </h2>
 
-        <ul className="mt-14 grid gap-6 md:grid-cols-3">
+        <ul className="reveal mt-14 grid gap-6 md:grid-cols-3">
           {quotes.map((item) => (
             <li
               key={item.name}
-              className="flex flex-col gap-6 rounded-lg border border-rule bg-raised p-7"
+              className="flex flex-col gap-6 rounded-lg border border-rule bg-raised p-7 transition-colors hover:border-rule-strong"
             >
               <blockquote className="leading-relaxed text-pretty">
                 &ldquo;{item.quote}&rdquo;
               </blockquote>
               <div className="mt-auto flex items-center gap-3 border-t border-rule pt-5">
                 <span
-                  className="flex size-9 shrink-0 items-center justify-center rounded-full border border-rule bg-sunken text-xs font-medium text-ink-soft"
+                  className="flex size-9 shrink-0 items-center justify-center rounded-full border border-bone/40 bg-bone/15 text-xs font-medium text-ink-soft"
                   aria-hidden="true"
                 >
                   {item.name

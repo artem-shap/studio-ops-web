@@ -39,14 +39,14 @@ export function Process() {
           </p>
         </div>
 
-        <ol className="flex flex-col">
+        <ol className="reveal flex flex-col">
           {steps.map((step, index) => (
             <li
               key={step.title}
-              className="flex gap-6 border-t border-rule py-7 first:border-t-0 first:pt-0 sm:gap-10"
+              className="group flex gap-6 border-t border-rule py-7 transition-colors first:border-t-0 first:pt-0 hover:border-rule-strong sm:gap-10"
             >
               <span
-                className="font-mono text-sm text-ink-faint tabular-nums"
+                className="font-mono text-sm text-slate-tint tabular-nums"
                 aria-hidden="true"
               >
                 {String(index + 1).padStart(2, "0")}

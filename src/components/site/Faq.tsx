@@ -54,7 +54,7 @@ export function Faq() {
           </h2>
         </div>
 
-        <div className="flex flex-col">
+        <div className="reveal flex flex-col">
           {faqs.map((faq) => (
             <details
               key={faq.q}
@@ -63,7 +63,7 @@ export function Faq() {
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-base font-medium transition-colors hover:text-ink-soft [&::-webkit-details-marker]:hidden">
                 {faq.q}
                 <Plus
-                  className="size-4 shrink-0 text-ink-faint transition-transform duration-200 group-open:rotate-45"
+                  className="size-4 shrink-0 text-ink-faint transition-all duration-200 group-open:rotate-45 group-open:text-clay"
                   strokeWidth={1.75}
                   aria-hidden="true"
                 />

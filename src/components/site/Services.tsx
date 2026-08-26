@@ -1,23 +1,31 @@
 import { Compass, LayoutGrid, Wrench } from "lucide-react";
 
+/**
+ * The tint is not decoration: each kind of work keeps the same colour here and
+ * on its case study, so the two sections read as one taxonomy rather than two
+ * lists. Written out in full because Tailwind reads complete class names.
+ */
 const services = [
   {
     icon: Compass,
     title: "Brand and positioning",
     body: "Naming, identity and the one sentence that makes everything else easier to write. Delivered as a system your team can apply without us.",
     includes: ["Identity", "Messaging", "Guidelines"],
+    tint: "border-clay/30 bg-clay/10 text-clay",
   },
   {
     icon: LayoutGrid,
     title: "Websites that get handed over",
     body: "Marketing sites and storefronts built so your own developers can pick them up. No retainer required to change a headline.",
     includes: ["Design", "Build", "Handover"],
+    tint: "border-indigo/30 bg-indigo/10 text-indigo",
   },
   {
     icon: Wrench,
     title: "Internal tools",
     body: "The spreadsheet that quietly runs your business, turned into something that still works when the person who made it leaves.",
     includes: ["Discovery", "Product", "Build"],
+    tint: "border-sage/30 bg-sage/10 text-sage",
   },
 ];
 
@@ -29,23 +37,27 @@ export function Services() {
       className="scroll-mt-16 border-b border-rule py-20 sm:py-24"
     >
       <div className="site-x w-full">
-        <p className="eyebrow">What we do</p>
-        <h2
-          id="services-heading"
-          className="mt-4 max-w-lg text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
-        >
-          Three kinds of work, done properly
-        </h2>
+        <div className="reveal">
+          <p className="eyebrow">What we do</p>
+          <h2
+            id="services-heading"
+            className="mt-4 max-w-lg text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
+          >
+            Three kinds of work, done properly
+          </h2>
+        </div>
 
-        <ul className="mt-14 grid gap-px bg-rule md:grid-cols-3">
+        <ul className="reveal mt-14 grid gap-px bg-rule md:grid-cols-3">
           {services.map((service) => (
             <li
               key={service.title}
-              className="flex flex-col gap-5 bg-paper p-8"
+              className="group flex flex-col gap-5 bg-paper p-8 transition-colors hover:bg-raised"
             >
-              <span className="flex size-10 items-center justify-center rounded-lg border border-rule bg-sunken">
+              <span
+                className={`flex size-11 items-center justify-center rounded-lg border transition-transform duration-300 group-hover:-translate-y-0.5 ${service.tint}`}
+              >
                 <service.icon
-                  className="size-4.5"
+                  className="size-5"
                   strokeWidth={1.5}
                   aria-hidden="true"
                 />

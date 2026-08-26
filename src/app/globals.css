@@ -25,6 +25,19 @@
   --rule: oklch(90.5% 0.004 80);
   --rule-strong: oklch(82% 0.006 80);
   --brand: oklch(47% 0.14 250);
+
+  /*
+   * Six tints, taken from the colour chips in the Northlight case study
+   * photograph. They exist to tell one kind of work from another, not to
+   * decorate: each is tied to a service and used in the same place every time.
+   * The site stays monochrome; these appear at small sizes and low saturation.
+   */
+  --bone: oklch(88% 0.026 85);
+  --oat: oklch(80% 0.045 75);
+  --clay: oklch(58% 0.105 42);
+  --sage: oklch(56% 0.055 135);
+  --slate: oklch(56% 0.05 250);
+  --indigo: oklch(44% 0.085 268);
   --radius: 0.5rem;
 
   --background: var(--paper);
@@ -67,6 +80,13 @@
     --rule-strong: oklch(36% 0.014 265);
     --brand: oklch(76% 0.12 250);
     --destructive: oklch(65% 0.19 25);
+
+    --bone: oklch(78% 0.024 85);
+    --oat: oklch(72% 0.042 75);
+    --clay: oklch(68% 0.105 42);
+    --sage: oklch(68% 0.06 135);
+    --slate: oklch(68% 0.055 250);
+    --indigo: oklch(66% 0.09 268);
   }
 }
 
@@ -81,6 +101,13 @@
   --rule-strong: oklch(36% 0.014 265);
   --brand: oklch(76% 0.12 250);
   --destructive: oklch(65% 0.19 25);
+
+  --bone: oklch(78% 0.024 85);
+  --oat: oklch(72% 0.042 75);
+  --clay: oklch(68% 0.105 42);
+  --sage: oklch(68% 0.06 135);
+  --slate: oklch(68% 0.055 250);
+  --indigo: oklch(66% 0.09 268);
 }
 
 @theme inline {
@@ -93,6 +120,12 @@
   --color-rule: var(--rule);
   --color-rule-strong: var(--rule-strong);
   --color-brand: var(--brand);
+  --color-bone: var(--bone);
+  --color-oat: var(--oat);
+  --color-clay: var(--clay);
+  --color-sage: var(--sage);
+  --color-slate-tint: var(--slate);
+  --color-indigo: var(--indigo);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -190,12 +223,64 @@
   );
 }
 
+/*
+ * Scroll-driven reveals, in CSS.
+ *
+ * No IntersectionObserver and no JavaScript: this is a static page and adding
+ * a client component to fade things in would undo the bundle work. The
+ * @supports guard matters — where scroll timelines are unsupported the
+ * elements simply start visible, which is the correct fallback rather than a
+ * blank page waiting for a script that never runs.
+ */
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    opacity: 0;
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 22%;
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* The hero should never wait for a scroll: it plays once on load. */
+@utility rise {
+  animation: rise-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Anything that animated in has to end up visible, not stuck at zero. */
+  .reveal,
+  .rise {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

@@ -31,11 +31,11 @@ export function ClientStrip() {
           Trusted by
         </h2>
 
-        <ul className="grid w-full grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3 lg:flex lg:justify-between lg:gap-x-6">
+        <ul className="reveal grid w-full grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3 lg:flex lg:justify-between lg:gap-x-6">
           {clients.map((client) => (
             <li
               key={client}
-              className="text-sm font-medium text-ink-faint transition-colors hover:text-ink-soft lg:whitespace-nowrap"
+              className="text-sm font-medium text-ink-faint transition-colors hover:text-oat lg:whitespace-nowrap"
             >
               {client}
             </li>

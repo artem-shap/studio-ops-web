@@ -9,6 +9,7 @@ const work = [
     outcome: "Opened on schedule",
     tags: ["Identity", "Website"],
     variant: "identity" as const,
+    tint: "border-clay/35 text-clay",
     image: "/work/northlight.jpg",
     alt: "A design review table: the roaster's old packaging beside the new range, printed colour chips and a layout proof arranged in a grid.",
   },
@@ -20,6 +21,7 @@ const work = [
     outcome: "Cart abandonment down by a third",
     tags: ["E-commerce", "Build"],
     variant: "commerce" as const,
+    tint: "border-indigo/35 text-indigo",
     image: "/work/tidewater.jpg",
     alt: "Printed page templates laid out left to right in flow order, annotated in pencil, with the rebuilt version running on a laptop at the end of the row.",
   },
@@ -31,6 +33,7 @@ const work = [
     outcome: "No-shows halved in two months",
     tags: ["Product", "Internal tools"],
     variant: "product" as const,
+    tint: "border-sage/35 text-sage",
     image: "/work/meridian.jpg",
     alt: "The practice's old paper appointment book open beside a tablet running the booking tool that replaced it.",
   },
@@ -44,7 +47,7 @@ export function Work() {
       className="scroll-mt-16 border-b border-rule py-20 sm:py-24"
     >
       <div className="site-x w-full">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+        <div className="reveal flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="eyebrow">Selected work</p>
             <h2
@@ -60,15 +63,19 @@ export function Work() {
           </p>
         </div>
 
-        <ul className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-3">
+        <ul className="reveal mt-14 grid gap-x-8 gap-y-14 md:grid-cols-3">
           {work.map((item) => (
-            <li key={item.client} className="flex flex-col gap-5">
-              <figure className="flex flex-col gap-3">
-                <ProjectVisual
-                  variant={item.variant}
-                  image={item.image}
-                  alt={item.alt}
-                />
+            <li key={item.client} className="group flex flex-col gap-5">
+              <figure className="flex flex-col gap-3 overflow-hidden">
+                <div className="overflow-hidden rounded-lg">
+                  <div className="transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+                    <ProjectVisual
+                      variant={item.variant}
+                      image={item.image}
+                      alt={item.alt}
+                    />
+                  </div>
+                </div>
                 <figcaption className="text-xs text-ink-faint">
                   {item.caption}
                 </figcaption>
@@ -88,7 +95,7 @@ export function Work() {
                   {item.tags.map((tag) => (
                     <li
                       key={tag}
-                      className="rounded-full border border-rule px-2.5 py-0.5 text-xs text-ink-faint"
+                      className={`rounded-full border px-2.5 py-0.5 text-xs ${item.tint}`}
                     >
                       {tag}
                     </li>

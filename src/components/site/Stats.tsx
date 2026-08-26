@@ -8,7 +8,7 @@ const stats = [
 export function Stats() {
   return (
     <section aria-label="By the numbers" className="border-b border-rule">
-      <dl className="grid w-full grid-cols-2 gap-px bg-rule lg:grid-cols-4">
+      <dl className="reveal grid w-full grid-cols-2 gap-px bg-rule lg:grid-cols-4">
         {stats.map((stat) => (
           <div key={stat.label} className="bg-paper px-5 py-10 sm:px-8 lg:px-12 xl:px-16">
             <dt className="sr-only">{stat.label}</dt>
