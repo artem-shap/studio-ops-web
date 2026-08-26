@@ -10,13 +10,7 @@ export function Hero() {
       />
 
       <div className="relative mx-auto w-full max-w-6xl px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
-        <p className="flex items-center gap-2.5 text-xs text-ink-soft">
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full rounded-full bg-emerald-500/60" />
-            <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-          </span>
-          Taking on two projects for Q1
-        </p>
+        <p className="eyebrow">Design and development studio</p>
 
         <h1 className="mt-8 max-w-4xl text-4xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
           Good work, and always knowing where it stands

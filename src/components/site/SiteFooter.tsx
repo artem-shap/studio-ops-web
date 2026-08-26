@@ -59,7 +59,7 @@ export function SiteFooter() {
             &copy; {year} StudioOps. All rights reserved.
           </p>
           <p className="text-sm text-ink-faint">
-            Currently taking on two projects for Q1
+            Brand, websites and internal tools
           </p>
         </div>
       </div>

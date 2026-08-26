@@ -56,10 +56,6 @@ export default function Home() {
                   <dt className="text-ink-faint">Typical project</dt>
                   <dd className="mt-1 font-medium">$15k to $40k</dd>
                 </div>
-                <div>
-                  <dt className="text-ink-faint">Availability</dt>
-                  <dd className="mt-1 font-medium">Two slots for Q1</dd>
-                </div>
               </dl>
             </div>
 
