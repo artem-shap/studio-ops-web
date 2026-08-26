@@ -1,21 +1,12 @@
 "use client";
 
-// Client component for the mobile menu and the scroll state. Nothing here
-// touches data.
+// Client only for the scrolled state of the bar. The menu itself is a native
+// disclosure and needs no JavaScript at all.
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Wordmark } from "@/components/site/Wordmark";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 const links = [
   { href: "#work", label: "Work" },
@@ -24,6 +15,14 @@ const links = [
   { href: "#faq", label: "FAQ" },
 ];
 
+/**
+ * The mobile menu is a details/summary disclosure rather than a dialog.
+ *
+ * A dialog primitive brings focus trapping, scroll locking and an inert
+ * background — all of which a modal needs and a navigation panel does not.
+ * The panel sits under the bar in the normal flow, so the browser's own
+ * behaviour is correct and the library it replaced was 111 KB gzipped.
+ */
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -60,51 +59,51 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button
-            render={<a href="#inquiry" />}
-            className="hidden h-9 px-4 sm:inline-flex"
+          <a
+            href="#inquiry"
+            className="hidden h-9 items-center rounded-lg bg-ink px-4 text-sm font-medium text-paper transition-opacity hover:opacity-90 sm:inline-flex"
           >
             Start a project
-          </Button>
+          </a>
 
-          <Sheet>
-            <SheetTrigger
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="md:hidden"
-                  aria-label="Open menu"
-                />
-              }
+          <details className="group md:hidden">
+            <summary
+              className="flex size-9 cursor-pointer list-none items-center justify-center rounded-lg text-ink transition-colors hover:bg-sunken [&::-webkit-details-marker]:hidden"
+              aria-label="Menu"
             >
-              <Menu className="size-5" strokeWidth={1.75} aria-hidden="true" />
-            </SheetTrigger>
-            <SheetContent side="right" className="w-72">
-              <SheetHeader>
-                <SheetTitle className="text-left">
-                  <Wordmark className="text-sm" />
-                </SheetTitle>
-              </SheetHeader>
-              <nav aria-label="Mobile" className="flex flex-col gap-1 px-4">
-                {links.map((link) => (
-                  <SheetClose
-                    key={link.href}
-                    render={<a href={link.href} />}
-                    className="rounded-md px-3 py-2.5 text-left text-sm text-ink-soft transition-colors hover:bg-sunken hover:text-ink"
-                  >
-                    {link.label}
-                  </SheetClose>
-                ))}
-                <SheetClose
-                  render={<a href="#inquiry" />}
-                  className="mt-3 rounded-md bg-ink px-3 py-2.5 text-center text-sm font-medium text-paper"
+              <Menu
+                className="size-5 group-open:hidden"
+                strokeWidth={1.75}
+                aria-hidden="true"
+              />
+              <X
+                className="hidden size-5 group-open:block"
+                strokeWidth={1.75}
+                aria-hidden="true"
+              />
+            </summary>
+
+            <nav
+              aria-label="Mobile"
+              className="site-x absolute inset-x-0 top-16 flex flex-col gap-1 border-b border-rule bg-paper pb-5"
+            >
+              {links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-md py-2.5 text-sm text-ink-soft transition-colors hover:text-ink"
                 >
-                  Start a project
-                </SheetClose>
-              </nav>
-            </SheetContent>
-          </Sheet>
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#inquiry"
+                className="mt-2 rounded-lg bg-ink px-4 py-2.5 text-center text-sm font-medium text-paper"
+              >
+                Start a project
+              </a>
+            </nav>
+          </details>
         </div>
       </div>
     </header>

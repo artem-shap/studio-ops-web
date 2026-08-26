@@ -108,3 +108,31 @@ state with a reload link. The error boundary stays for things that genuinely are
 errors.
 
 **Commit:** `b5bb308`
+
+---
+
+## 6. A validation library shipped to render six options
+
+**Generated:** `budgetRanges` exported from the same module as the Zod schema,
+and the client form importing it from there. Grouping a form's schema and its
+option lists in one file is tidy and reads well.
+
+**Why it was wrong:** the import pulled Zod into the client bundle. 283 KB of
+raw JavaScript went to the browser so a `<select>` could render five options,
+on a page that does no client-side validation at all — validation belongs to
+the Server Action, which runs on the server, where Zod already is.
+
+It never showed up in a type error or a test. The build succeeded, the page
+worked, and the only symptom was the number in a bundle measurement nobody had
+taken yet.
+
+**Fixed:** the list moved to its own module with no imports, and the schema
+re-exports it so nothing else had to change. Application JavaScript on the
+landing page went from 74.6 KB gzipped to 11.4 KB.
+
+**The general shape:** in a codebase with a server/client boundary, an import is
+a decision about what ships to the browser. A file that groups server-only
+dependencies with values a client component needs turns that decision into an
+accident.
+
+**Commit:** the bundle audit commit

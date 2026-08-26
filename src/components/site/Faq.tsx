@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Plus } from "lucide-react";
 
 const faqs = [
   {
@@ -32,6 +27,15 @@ const faqs = [
   },
 ];
 
+/**
+ * Native details/summary rather than a JavaScript accordion.
+ *
+ * The component library's version cost 111 KB gzipped on a page whose whole
+ * point is being static and fast, in exchange for behaviour the browser
+ * already implements — keyboard support, the expanded state, and the
+ * accessible name are all free here. It also keeps working with JavaScript
+ * disabled, which a marketing page should.
+ */
 export function Faq() {
   return (
     <section
@@ -50,18 +54,26 @@ export function Faq() {
           </h2>
         </div>
 
-        <Accordion multiple={false} className="w-full">
+        <div className="flex flex-col">
           {faqs.map((faq) => (
-            <AccordionItem key={faq.q} value={faq.q}>
-              <AccordionTrigger className="text-left text-base font-medium">
+            <details
+              key={faq.q}
+              className="group border-b border-rule first:border-t first:border-rule"
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-base font-medium transition-colors hover:text-ink-soft [&::-webkit-details-marker]:hidden">
                 {faq.q}
-              </AccordionTrigger>
-              <AccordionContent className="max-w-2xl leading-relaxed text-ink-soft">
+                <Plus
+                  className="size-4 shrink-0 text-ink-faint transition-transform duration-200 group-open:rotate-45"
+                  strokeWidth={1.75}
+                  aria-hidden="true"
+                />
+              </summary>
+              <p className="max-w-2xl pb-6 leading-relaxed text-ink-soft">
                 {faq.a}
-              </AccordionContent>
-            </AccordionItem>
+              </p>
+            </details>
           ))}
-        </Accordion>
+        </div>
       </div>
     </section>
   );

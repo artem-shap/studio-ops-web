@@ -6,11 +6,12 @@
 import { ArrowRight, Check } from "lucide-react";
 import { useActionState, useId } from "react";
 import { sendInquiry, type InquiryState } from "@/app/actions";
-import { budgetRanges } from "@/lib/schemas/inquiry";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import {
+  buttonPrimary,
+  control,
+  label as labelClass,
+} from "@/components/site/controls";
+import { budgetRanges } from "@/lib/schemas/budget";
 
 const initial: InquiryState = { status: "idle" };
 
@@ -54,8 +55,10 @@ export function InquiryForm() {
     >
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <Label htmlFor={`${uid}-name`}>Your name</Label>
-          <Input
+          <label htmlFor={`${uid}-name`} className={labelClass}>
+            Your name
+          </label>
+          <input
             id={`${uid}-name`}
             name="name"
             required
@@ -64,13 +67,16 @@ export function InquiryForm() {
               state.errors?.name ? `${uid}-name-error` : undefined
             }
             aria-invalid={state.errors?.name ? true : undefined}
+            className={control}
           />
           <FieldError id={`${uid}-name-error`} messages={state.errors?.name} />
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor={`${uid}-email`}>Email</Label>
-          <Input
+          <label htmlFor={`${uid}-email`} className={labelClass}>
+            Email
+          </label>
+          <input
             id={`${uid}-email`}
             name="email"
             type="email"
@@ -80,23 +86,22 @@ export function InquiryForm() {
               state.errors?.email ? `${uid}-email-error` : undefined
             }
             aria-invalid={state.errors?.email ? true : undefined}
+            className={control}
           />
-          <FieldError
-            id={`${uid}-email-error`}
-            messages={state.errors?.email}
-          />
+          <FieldError id={`${uid}-email-error`} messages={state.errors?.email} />
         </div>
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <Label htmlFor={`${uid}-company`}>
+          <label htmlFor={`${uid}-company`} className={labelClass}>
             Company <span className="font-normal text-ink-faint">optional</span>
-          </Label>
-          <Input
+          </label>
+          <input
             id={`${uid}-company`}
             name="company"
             autoComplete="organization"
+            className={control}
           />
           <FieldError
             id={`${uid}-company-error`}
@@ -105,20 +110,20 @@ export function InquiryForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor={`${uid}-budget`}>
+          <label htmlFor={`${uid}-budget`} className={labelClass}>
             Budget <span className="font-normal text-ink-faint">optional</span>
-          </Label>
+          </label>
           {/*
-            A native select on purpose. The styled one is a listbox that keeps
-            its value in React state, and this form is submitted natively as
-            FormData by a Server Action — so a component that does not put a
-            value in the form is a component that silently drops the field.
+            A native select on purpose. A listbox component keeps its value in
+            React state, and this form is submitted natively as FormData by a
+            Server Action — a control that puts nothing in the form silently
+            drops the field.
           */}
           <select
             id={`${uid}-budget`}
             name="budgetRange"
             defaultValue=""
-            className="h-9 w-full rounded-lg border border-input bg-background px-3 text-sm shadow-xs transition-colors hover:border-rule-strong focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+            className={control}
           >
             <option value="">Prefer not to say</option>
             {budgetRanges.map((range) => (
@@ -131,8 +136,10 @@ export function InquiryForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor={`${uid}-message`}>What are you trying to do?</Label>
-        <Textarea
+        <label htmlFor={`${uid}-message`} className={labelClass}>
+          What are you trying to do?
+        </label>
+        <textarea
           id={`${uid}-message`}
           name="message"
           rows={6}
@@ -142,7 +149,7 @@ export function InquiryForm() {
             state.errors?.message ? `${uid}-message-error` : undefined
           }
           aria-invalid={state.errors?.message ? true : undefined}
-          className="leading-relaxed"
+          className={`${control} resize-y leading-relaxed`}
         />
         <FieldError
           id={`${uid}-message-error`}
@@ -166,10 +173,7 @@ export function InquiryForm() {
         />
       </div>
 
-      <FieldError
-        id={`${uid}-website-error`}
-        messages={state.errors?.website}
-      />
+      <FieldError id={`${uid}-website-error`} messages={state.errors?.website} />
 
       {state.message ? (
         <p className="text-sm text-destructive" role="alert">
@@ -178,18 +182,18 @@ export function InquiryForm() {
       ) : null}
 
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-rule pt-6">
-        <Button
+        <button
           type="submit"
           disabled={pending}
-          className="group h-11 gap-2 px-6 text-sm"
+          className={`${buttonPrimary} group h-11 px-6`}
         >
           {pending ? "Sending" : "Send inquiry"}
           <ArrowRight
-            className="transition-transform group-hover:translate-x-0.5"
+            className="size-4 transition-transform group-hover:translate-x-0.5"
             strokeWidth={1.75}
             aria-hidden="true"
           />
-        </Button>
+        </button>
         <p className="text-sm text-ink-faint">
           No newsletter, no follow-up sequence.
         </p>

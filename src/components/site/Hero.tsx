@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonOutline, buttonPrimary } from "@/components/site/controls";
 
 export function Hero() {
   return (
@@ -23,24 +23,17 @@ export function Hero() {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
-          <Button
-            render={<a href="#inquiry" />}
-            className="group h-11 gap-2 px-6 text-sm"
-          >
+          <a href="#inquiry" className={`${buttonPrimary} group h-11 px-6`}>
             Start a project
             <ArrowRight
-              className="transition-transform group-hover:translate-x-0.5"
+              className="size-4 transition-transform group-hover:translate-x-0.5"
               strokeWidth={1.75}
               aria-hidden="true"
             />
-          </Button>
-          <Button
-            render={<a href="#work" />}
-            variant="outline"
-            className="h-11 px-6 text-sm"
-          >
+          </a>
+          <a href="#work" className={`${buttonOutline} h-11 px-6`}>
             See recent work
-          </Button>
+          </a>
         </div>
       </div>
     </section>

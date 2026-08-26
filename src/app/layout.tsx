@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { siteDescription, siteName, siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,20 +15,53 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+/**
+ * metadataBase is what turns the relative OG and icon paths into absolute URLs.
+ * Without it a shared link renders with no image and no canonical, which is the
+ * kind of thing nobody notices until the link is already in someone's inbox.
+ */
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "StudioOps — a design studio that keeps you in the loop",
-    template: "%s — StudioOps",
+    default: `${siteName} — a design studio that keeps you in the loop`,
+    template: `%s — ${siteName}`,
   },
-  description:
-    "Brand, websites and internal tools for companies that need the work handed over, not held hostage. Every client sees their own project as it moves.",
+  description: siteDescription,
+  applicationName: siteName,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "StudioOps — a design studio that keeps you in the loop",
-    description:
-      "Brand, websites and internal tools for companies that need the work handed over, not held hostage.",
     type: "website",
+    url: "/",
+    siteName,
+    title: `${siteName} — a design studio that keeps you in the loop`,
+    description: siteDescription,
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteName} — a design studio that keeps you in the loop`,
+    description: siteDescription,
+  },
+  manifest: "/manifest.webmanifest",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+};
+
+const organisation = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: siteName,
+  description: siteDescription,
+  url: siteUrl,
+  areaServed: "Worldwide",
+  knowsAbout: [
+    "Brand identity",
+    "Web design",
+    "Web development",
+    "Internal tools",
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -44,6 +78,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         {children}
+        {/*
+          Structured data describing the studio. Kept to what is actually true
+          on the page — inventing an address or a rating to fill a schema is how
+          rich results turn into a manual penalty.
+        */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organisation) }}
+        />
       </body>
     </html>
   );

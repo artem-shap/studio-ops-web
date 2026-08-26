@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { budgetRanges } from "@/lib/schemas/budget";
+
 /**
  * The one schema for the inquiry form, imported by the client component and by
  * the Server Action. Two schemas for one form drift, and the visitor is the one
@@ -25,10 +27,4 @@ export const inquirySchema = z.object({
 
 export type InquiryInput = z.infer<typeof inquirySchema>;
 
-export const budgetRanges = [
-  "Under $5k",
-  "$5k - $15k",
-  "$15k - $40k",
-  "$40k+",
-  "Not sure yet",
-] as const;
+export { budgetRanges };

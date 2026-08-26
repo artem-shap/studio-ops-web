@@ -28,6 +28,7 @@ The global `~/.claude/CLAUDE.md` mandates **Astro** and Supabase for every new w
 - Accessibility to WCAG 2.1 AA: semantic HTML, a `<label>` for every input, visible focus states, `aria-label` on icon-only buttons, 4.5:1 contrast, a skip-to-content link
 - SEO: unique `<title>` and description per page, Open Graph tags, canonical URL, one `<h1>` per page
 - Core Web Vitals: LCP under 2.0s, INP under 200ms, CLS under 0.1. Explicit `width` and `height` on every image
+- JS budget: under 100 KB gzipped of **application** code per page. React and the Next runtime are a fixed 174 KB gz baseline on top of that and cannot be traded away; measure the difference against a page with no components, not the raw total
 - Security headers, rate limiting, secrets only in environment variables
 - Custom error pages
 - No `console.log` in production code
