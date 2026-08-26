@@ -40,6 +40,24 @@ export function SiteHeader() {
    * A hash arriving from outside is still honoured on first load; only the
    * hash this page creates for itself is cleaned up.
    */
+  /*
+   * Clear a hash that arrived in the URL.
+   *
+   * Cleaning up only on click was not enough: a hash already sitting in the
+   * address bar — from a bookmark, from history, or from a click made before
+   * this existed — survives every reload, and the browser jumps to it every
+   * time. It is honoured once so an external deep link still works, then the
+   * URL is put back so the next reload lands at the top.
+   *
+   * #main is the skip link's target and is left alone.
+   */
+  useEffect(() => {
+    const { hash, pathname, search } = window.location;
+    if (!hash || hash === "#main") return;
+
+    window.history.replaceState(null, "", pathname + search);
+  }, []);
+
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0) return;
