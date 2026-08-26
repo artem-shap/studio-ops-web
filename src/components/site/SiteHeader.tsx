@@ -26,6 +26,50 @@ const links = [
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
 
+  /*
+   * One delegated listener rather than a handler per link.
+   *
+   * In-page links leave their hash in the address bar, so reloading drops the
+   * visitor back at whichever section they last jumped to rather than at the
+   * top of the site. This scrolls to the target and puts the URL back.
+   *
+   * Delegation is what makes it reach the anchors in the hero and the footer
+   * too — those are Server Components, and giving each one a click handler
+   * would mean shipping them to the browser for the sake of one line.
+   *
+   * A hash arriving from outside is still honoured on first load; only the
+   * hash this page creates for itself is cleaned up.
+   */
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+        return;
+      }
+
+      const anchor = (event.target as Element | null)?.closest?.(
+        'a[href^="#"]',
+      ) as HTMLAnchorElement | null;
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(null, "", window.location.pathname);
+
+      // Close the mobile menu if the click came from inside it.
+      anchor.closest("details")?.removeAttribute("open");
+    };
+
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -91,7 +135,7 @@ export function SiteHeader() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="rounded-md py-2.5 text-sm text-ink-soft transition-colors hover:text-ink"
+                      className="rounded-md py-2.5 text-sm text-ink-soft transition-colors hover:text-ink"
                 >
                   {link.label}
                 </a>
