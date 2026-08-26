@@ -24,7 +24,7 @@ export function Process() {
       aria-labelledby="process-heading"
       className="scroll-mt-16 border-b border-rule py-20 sm:py-24"
     >
-      <div className="mx-auto grid w-full max-w-6xl gap-14 px-6 lg:grid-cols-[20rem_1fr]">
+      <div className="site-x grid w-full gap-14 lg:grid-cols-[22rem_1fr]">
         <div>
           <p className="eyebrow">How it goes</p>
           <h2

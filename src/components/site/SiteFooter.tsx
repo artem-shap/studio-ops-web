@@ -25,7 +25,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-rule bg-raised">
-      <div className="mx-auto w-full max-w-6xl px-6 py-16">
+      <div className="site-x w-full py-16">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col gap-4 lg:col-span-2">
             <Wordmark className="text-sm" />

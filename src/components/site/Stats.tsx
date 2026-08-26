@@ -8,9 +8,9 @@ const stats = [
 export function Stats() {
   return (
     <section aria-label="By the numbers" className="border-b border-rule">
-      <dl className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-px bg-rule lg:grid-cols-4">
+      <dl className="grid w-full grid-cols-2 gap-px bg-rule lg:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.label} className="bg-paper px-6 py-10">
+          <div key={stat.label} className="bg-paper px-5 py-10 sm:px-8 lg:px-12 xl:px-16">
             <dt className="sr-only">{stat.label}</dt>
             <dd>
               <span className="block text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl">

@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 export default function NotFound() {
   return (
     <>
-      <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-6 py-24">
+      <main id="main" className="site-x mx-auto w-full max-w-4xl flex-1 py-24">
         <p className="eyebrow">Nothing here</p>
         <h1 className="mt-5 text-3xl font-semibold tracking-tight">
           There is nothing at this address

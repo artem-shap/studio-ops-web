@@ -9,7 +9,7 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto w-full max-w-6xl px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
+      <div className="site-x relative w-full pt-20 pb-24 sm:pt-28 sm:pb-32">
         <p className="eyebrow">Design and development studio</p>
 
         <h1 className="mt-8 max-w-4xl text-4xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">

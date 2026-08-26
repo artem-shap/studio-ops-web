@@ -149,6 +149,34 @@
   color: var(--ink-faint);
 }
 
+/*
+ * The one horizontal rhythm for the whole site, defined once.
+ *
+ * Full bleed rather than a centred column: on a wide display a fixed 1152px
+ * column leaves the header floating in the middle of the screen. Width comes
+ * from padding that grows with the viewport, and readability is protected
+ * where it actually matters — headlines and paragraphs carry their own measure.
+ */
+@utility site-x {
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: 3rem;
+  }
+
+  @media (width >= 80rem) {
+    padding-inline: 4rem;
+  }
+
+  @media (width >= 96rem) {
+    padding-inline: 6rem;
+  }
+}
+
 /* A hairline grid, used behind the hero. Decorative and very quiet. */
 @utility grid-backdrop {
   background-image:

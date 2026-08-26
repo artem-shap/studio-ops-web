@@ -25,7 +25,7 @@ export function Testimonials() {
       aria-labelledby="testimonials-heading"
       className="border-b border-rule py-20 sm:py-24"
     >
-      <div className="mx-auto w-full max-w-6xl px-6">
+      <div className="site-x w-full">
         <p className="eyebrow">What clients say</p>
         <h2
           id="testimonials-heading"

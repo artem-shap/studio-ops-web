@@ -42,7 +42,7 @@ export function SiteHeader() {
           : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
+      <div className="site-x flex h-16 w-full items-center justify-between">
         <Link href="/" aria-label="StudioOps home">
           <Wordmark className="text-sm" />
         </Link>

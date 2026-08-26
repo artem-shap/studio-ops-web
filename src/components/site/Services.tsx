@@ -28,7 +28,7 @@ export function Services() {
       aria-labelledby="services-heading"
       className="scroll-mt-16 border-b border-rule py-20 sm:py-24"
     >
-      <div className="mx-auto w-full max-w-6xl px-6">
+      <div className="site-x w-full">
         <p className="eyebrow">What we do</p>
         <h2
           id="services-heading"

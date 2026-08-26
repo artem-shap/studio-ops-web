@@ -186,7 +186,7 @@ export default async function PortalPage({
 
   if (result.state === "waking") {
     return (
-      <main id="main" className="mx-auto w-full max-w-3xl px-6 py-24">
+      <main id="main" className="site-x mx-auto w-full max-w-4xl py-24">
         <p className="eyebrow">One moment</p>
         <h1 className="mt-5 text-3xl font-semibold tracking-tight">
           Fetching your project
@@ -211,14 +211,14 @@ export default async function PortalPage({
   return (
     <>
       <header className="border-b border-rule">
-        <div className="mx-auto flex h-16 w-full max-w-3xl items-center px-6">
+        <div className="site-x mx-auto flex h-16 w-full max-w-4xl items-center">
           <span className="text-sm font-semibold tracking-tight">
             Studio<span className="text-ink-faint">Ops</span>
           </span>
         </div>
       </header>
 
-      <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-6">
+      <main id="main" className="site-x mx-auto w-full max-w-4xl flex-1">
         <div className="border-b border-rule py-14">
           <p className="eyebrow">Client portal</p>
           <h1 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">

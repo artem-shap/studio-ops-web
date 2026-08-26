@@ -15,7 +15,7 @@ export function ClientMarquee() {
       aria-label="Selected clients"
       className="border-b border-rule py-10"
     >
-      <div className="mx-auto w-full max-w-6xl px-6">
+      <div className="site-x w-full">
         <p className="eyebrow text-center">Trusted by</p>
       </div>
 

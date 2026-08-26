@@ -4,7 +4,7 @@ export default function Error({ reset }: { reset: () => void }) {
   // The actual error is logged server-side. A visitor cannot act on a stack
   // trace, and showing one only helps someone mapping the system.
   return (
-    <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-6 py-24">
+    <main id="main" className="site-x mx-auto w-full max-w-4xl flex-1 py-24">
       <p className="eyebrow">Something broke</p>
       <h1 className="mt-5 text-3xl font-semibold tracking-tight">
         That one is on us

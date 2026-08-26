@@ -33,7 +33,7 @@ export default function Home() {
           aria-labelledby="inquiry-heading"
           className="scroll-mt-16 py-20 sm:py-24"
         >
-          <div className="mx-auto grid w-full max-w-6xl gap-14 px-6 lg:grid-cols-[20rem_1fr]">
+          <div className="site-x grid w-full gap-14 lg:grid-cols-[22rem_1fr]">
             <div>
               <p className="eyebrow">Get in touch</p>
               <h2

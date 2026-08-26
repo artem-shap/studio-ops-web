@@ -34,7 +34,7 @@ export function Work() {
       aria-labelledby="work-heading"
       className="scroll-mt-16 border-b border-rule py-20 sm:py-24"
     >
-      <div className="mx-auto w-full max-w-6xl px-6">
+      <div className="site-x w-full">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="eyebrow">Selected work</p>
