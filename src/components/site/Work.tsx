@@ -9,7 +9,7 @@ const work = [
     tags: ["Identity", "Website"],
     variant: "identity" as const,
     image: null as string | null,
-    alt: "Brand identity for a speciality coffee roaster: packaging, cups and printed collateral laid out on a pale stone counter.",
+    alt: "A design review table: the roaster's old packaging beside the new, printed colour chips and layout proofs arranged in a grid.",
   },
   {
     client: "Tidewater Outfitters",
@@ -19,7 +19,7 @@ const work = [
     tags: ["E-commerce", "Build"],
     variant: "commerce" as const,
     image: null as string | null,
-    alt: "An outdoor outfitter's online store open on a laptop and a phone, sitting on a workbench beside folded technical fabric.",
+    alt: "Printed checkout screens laid out left to right in flow order, annotated in pencil, with the rebuilt version running on a laptop at the end of the row.",
   },
   {
     client: "Meridian Dental",
@@ -29,7 +29,7 @@ const work = [
     tags: ["Product", "Internal tools"],
     variant: "product" as const,
     image: null as string | null,
-    alt: "A booking screen open on a tablet at a dental practice reception desk, in soft daylight.",
+    alt: "The practice's old paper appointment book open beside a tablet running the booking tool that replaced it.",
   },
 ];
 
