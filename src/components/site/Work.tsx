@@ -3,18 +3,20 @@ import { ProjectVisual } from "@/components/site/ProjectVisual";
 const work = [
   {
     client: "Northlight Coffee",
-    title: "One brand across two locations",
-    body: "A second site meant two sets of hours, two menus and one identity that had to hold both. We rebuilt the brand system and the site behind it.",
+    title: "One identity, two shops, two teams",
+    body: "A second location meant the brand would be applied by people who had never met us. We rebuilt it as a system with rules tight enough to hand over — packaging, signage and the site all drawn from the same set.",
+    caption: "Packaging system. The previous range sits at left.",
     outcome: "Opened on schedule",
     tags: ["Identity", "Website"],
     variant: "identity" as const,
     image: null as string | null,
-    alt: "A design review table: the roaster's old packaging beside the new, printed colour chips and layout proofs arranged in a grid.",
+    alt: "A design review table: the roaster's old packaging beside the new range, printed colour chips and a layout proof arranged in a grid.",
   },
   {
     client: "Tidewater Outfitters",
     title: "A checkout that stops losing people",
-    body: "Half of the people who reached payment never finished. We replatformed the store, kept every URL, and rebuilt the last three steps.",
+    body: "Half of the people who reached payment never finished. We took the flow apart screen by screen, replatformed the store, kept every URL, and rebuilt the last three steps.",
+    caption: "Checkout flow, reworked screen by screen.",
     outcome: "Cart abandonment down by a third",
     tags: ["E-commerce", "Build"],
     variant: "commerce" as const,
@@ -23,8 +25,9 @@ const work = [
   },
   {
     client: "Meridian Dental",
-    title: "Booking that the front desk trusts",
-    body: "A shared calendar had become the booking system. We replaced it with availability by location, deposits, and reminders that actually send.",
+    title: "Booking the front desk actually trusts",
+    body: "A shared paper diary had become the booking system, and the crossings-out were the audit trail. We replaced it with availability by location, deposits, and reminders that send themselves.",
+    caption: "The appointment book the tool replaced.",
     outcome: "No-shows halved in two months",
     tags: ["Product", "Internal tools"],
     variant: "product" as const,
@@ -60,11 +63,16 @@ export function Work() {
         <ul className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-3">
           {work.map((item) => (
             <li key={item.client} className="flex flex-col gap-5">
-              <ProjectVisual
-                variant={item.variant}
-                image={item.image}
-                alt={item.alt}
-              />
+              <figure className="flex flex-col gap-3">
+                <ProjectVisual
+                  variant={item.variant}
+                  image={item.image}
+                  alt={item.alt}
+                />
+                <figcaption className="text-xs text-ink-faint">
+                  {item.caption}
+                </figcaption>
+              </figure>
 
               <div className="flex flex-col gap-3">
                 <p className="eyebrow">{item.client}</p>
