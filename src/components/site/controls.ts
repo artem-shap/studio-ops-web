@@ -6,8 +6,9 @@
  * gzipped on a page that is otherwise static — in exchange for nothing this
  * site uses: no polymorphic render, no controlled state, no floating layer.
  *
- * Anything that genuinely needs behaviour can still come from the registry;
- * `src/components/ui/` is untouched. This is only for the plain cases.
+ * The registry is still configured in components.json, so anything that
+ * genuinely needs behaviour — a listbox, a dialog, a date picker — can be
+ * pulled in when it is needed. Nothing is kept installed that nothing uses.
  */
 
 export const control =
