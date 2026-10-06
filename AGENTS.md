@@ -39,8 +39,8 @@ The global `~/.claude/CLAUDE.md` mandates **Astro** and Supabase for every new w
 
 | Layer | Technology |
 |---|---|
-| Framework | Next.js 16.3.2 (App Router) |
-| React | 19.2.8 |
+| Framework | Next.js 16.3.8 (App Router) |
+| React | 19.3.0 |
 | Language | TypeScript 5.9, strict |
 | Styling | Tailwind 4.3 |
 | Icons | Lucide |
@@ -49,7 +49,7 @@ The global `~/.claude/CLAUDE.md` mandates **Astro** and Supabase for every new w
 | Hosting | Vercel Hobby (free) |
 | Package manager | pnpm |
 
-The Next.js version is pinned exactly, not with a caret range. A security release on 2026-08-26 closes a critical vulnerability in 16.3 and must be applied as soon as it lands.
+The Next.js version is pinned exactly, not with a caret range, so every upgrade is a deliberate commit. 16.3.2 to 16.3.8 closed three critical remote-code-execution advisories, two of them in features this site uses (`next/image` optimisation and `next/og`). They sat unapplied for five weeks because nothing ran `pnpm audit` on a schedule; CI now does (see `.github/workflows`).
 
 ---
 
