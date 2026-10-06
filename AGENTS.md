@@ -45,6 +45,7 @@ The global `~/.claude/CLAUDE.md` mandates **Astro** and Supabase for every new w
 | Styling | Tailwind 4.3 |
 | Icons | Lucide |
 | Validation | Zod |
+| Linting | ESLint 10 (see `eslint.config.mjs` for the one React-plugin workaround) |
 | Tests | Vitest |
 | Hosting | Vercel Hobby (free) |
 | Package manager | pnpm |
